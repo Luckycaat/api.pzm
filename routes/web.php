@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pokemon\PokemonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PokemonController::class, 'index']);
+Route::resource('pokemon', PokemonController::class, ['names' => 'pokemon'])->except(['index']);
+Route::get('/generate', [PokemonController::class, 'generate'])->name('pokemon.generate');
